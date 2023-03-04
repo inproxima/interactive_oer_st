@@ -30,7 +30,7 @@ st.sidebar.header("Copyright")
 st.sidebar.markdown(
     """
 - This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)
-- [This application is open source](https://github.com/RoshiniFernando/Heli)
+- [This application is open source](https://github.com/inproxima/interactive_oer_st)
 """
 )
 

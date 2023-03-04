@@ -8,3 +8,20 @@ We believe that our program is a game-changer in the field of education and rese
 # About
 This application was created by [Soroush Sabbaghan](mailto:ssabbagh@ucalgary.ca) using [Streamlit](https://streamlit.io/), [streamlit-chat](https://pypi.org/project/streamlit-chat/) and [OpenAI API](https://openai.com/api/)'s 
 the most updated model [gpt-3.5-turbo](https://platform.openai.com/docs/models/overview) for educational purposes. 
+
+# Change log
+- Current OER AI Development Bot 2.0 powered by OpenAI (ChatGPT) gpt-3.5-turbo model
+- OER AI Development Bot 1.0 powered by OpenAI text-davinci-003 model
+
+# Setup
+- Create a new file on your local machine and name it "app.py".
+- Copy the code provided in the question and paste it into the "app.py" file.
+- Make sure you have installed all the necessary libraries by running the following command in your terminal:
+
+pip install openai streamlit streamlit_ext streamlit_chat
+
+Once you have installed the necessary libraries, run the following command in your terminal to start the app:
+
+streamlit run app.py
+
+The app should open in your default browser. You can now interact with the chatbot by following the steps provided in the app.

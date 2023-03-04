@@ -14,8 +14,8 @@ the most updated model [gpt-3.5-turbo](https://platform.openai.com/docs/models/o
 - OER AI Development Bot 1.0 powered by OpenAI text-davinci-003 model
 
 # Setup and usage
-- Create a new file on your local machine and name it 'app.py'.
-- Copy the code provided in the question and paste it into the 'app.py' file.
-- Make sure you have installed all the necessary libraries by running the following command in your terminal: 'pip install openai streamlit streamlit_ext streamlit_chat'
-- Once you have installed the necessary libraries, run the following command in your terminal to start the app: 'streamlit run app.py'
+- Create a new file on your local machine and name it `app.py`.
+- Copy the code provided in the question and paste it into the `app.py` file.
+- Make sure you have installed all the necessary libraries by running the following command in your terminal: `pip install openai streamlit streamlit_ext streamlit_chat`
+- Once you have installed the necessary libraries, run the following command in your terminal to start the app: `streamlit run app.py`
 - The app should open in your default browser. You can now interact with the chatbot by following the steps provided in the app.

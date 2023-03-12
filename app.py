@@ -2,11 +2,10 @@ import openai
 import streamlit as st
 import streamlit_ext as ste
 from streamlit_chat import message
-import os 
-import json
+
 
 #page setting
-st.set_page_config(page_title="AI Open Education ", page_icon="🤖", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="AI Open Education ", page_icon="🤖", initial_sidebar_state="expanded")
 
 hide_st_style = """
         <style>
@@ -16,6 +15,11 @@ hide_st_style = """
         </style>
 """
 st.markdown(hide_st_style, unsafe_allow_html=True)
+
+message_log = [
+                {"role": "system", "content": "You are an open education development bot. You respond to queries as best as you can."}, 
+                {"role": "user", "content": "Please help me develop educational content."}
+                 ]
 
 st.sidebar.header("About")
 st.sidebar.markdown(
@@ -44,15 +48,12 @@ st.sidebar.markdown(
 
 
 #Functions
-def generate_response(prompt):
+def generate_response(prompt, temprature, max_tokens):
     response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            messages=[
-                    {"role": "system", "content": "You are an open education development bot. You respond to queries as best as you can."},
-                    {"role": "user", "content": prompt}
-                    ],
-            temperature=0.0,
-            max_tokens=300,
+            messages=message_log,
+            temperature=temprature,
+            max_tokens=max_tokens,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0
@@ -79,13 +80,28 @@ if 'input' not in st.session_state:
     st.session_state.input = ""
 
 #page design and input
-st.title("OER AI Development Bot")
+st.title("Hi! I'm ARIA (Advanced Responsive Information Agent)")
 st.markdown("""___""")
 st.subheader("Step 1:")
 st.subheader("Please input the following information:")
 url = "https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key"
 api = st.text_input("If you don't know your OpenAI API key click [here](%s)." % url, type="password", placeholder="Your API Key")
 topic = st.text_input("What topic would you like to discuss with the Chatbot?")
+col1, col2 = st.columns(2)
+with col1:
+     style = st.radio(
+    "How would you like ARIA to respond to your questions?",
+    ('Be Percise', 'Be Balanced', 'Be Creative'))
+
+if style == 'Be Percise':
+    temprature = 0.0
+elif style == 'Be Balanced':
+    temprature = 0.5
+else:
+     temprature = 1.0
+
+with col2:
+     max_tokens = st.slider("What is the maximum number of words that you'd like ARIA to produce for every response?", 100, 300, 150)   
 
 #check API
 if st.button(label='Submit'):
@@ -124,7 +140,9 @@ conversations = []
 if st.button("Send"):
     with st.spinner("By code and algorithm, hear my call, let this AI speak with rhyme for all :magic_wand:"):
         
-        output = generate_response(user_input)
+        message_log.append({"role": "user", "content": user_input})
+        output = generate_response(user_input, temprature, max_tokens)
+        message_log.append({"role": "assistant", "content": output})
         #store the output
         st.session_state['past'].append(user_input)
         st.session_state['generated'].append(output)
